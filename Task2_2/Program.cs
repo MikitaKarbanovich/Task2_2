@@ -11,6 +11,7 @@ namespace Task2_2
     {
         static void Main(string[] args)
         {
+            InfoAboutString info = new InfoAboutString();
             WorkWithStrings wws = new WorkWithStrings();
             ArrayList text = new ArrayList();
             ArrayList words = new ArrayList();
@@ -18,7 +19,8 @@ namespace Task2_2
             foreach (string sentence in text)
             {
                 words=wws.ParseText(sentence);
-                wws.CheckWord(words);
+                info = wws.CheckWord(words);
+                wws.ConsoleWritter(info);
             }
         }
     }

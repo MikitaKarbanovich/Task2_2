@@ -12,7 +12,7 @@ namespace Task2_2
         public ArrayList ParseText(string text)
         {
             ArrayList sentences = new ArrayList();
-            char[] delimiterChars = { ' '};
+            char[] delimiterChars = {' '};
             System.Console.WriteLine("Original text: '{0}'", text);
             sentences.AddRange(text.Split(delimiterChars));
             return sentences;
@@ -21,6 +21,7 @@ namespace Task2_2
         {
             ArrayList sentences = new ArrayList();
             string keyboardInput = "";
+            Console.WriteLine("If you want exit, enter exit in new string:");
             while (!keyboardInput.Equals("exit"))
             {
                 keyboardInput = Console.ReadLine();
@@ -31,7 +32,7 @@ namespace Task2_2
             }
             return sentences;
         }
-        public void CheckWord(ArrayList words)
+        public InfoAboutString CheckWord(ArrayList words)
         {
             int intCounter=0;
             int intSum=0;
@@ -41,34 +42,61 @@ namespace Task2_2
             double doubleValue;
             double averageOfInts = 0;
             double averageOfDoubles = 0;
+            ArrayList intStrings = new ArrayList();
+            ArrayList doubleStrings = new ArrayList();
             ArrayList otherStrings = new ArrayList();
+            InfoAboutString info = new InfoAboutString();
+    
             foreach (string word in words)
             {
                 if (int.TryParse(word, out intValue))
                 {
-
+                    intStrings.Add(word);
                     intSum+= intValue;
                     intCounter++;
                 }
                 else if (double.TryParse(word, out doubleValue))
                 {
+                    doubleStrings.Add(word);
                     doubleSum+= doubleValue;
                     doubleCounter++;
                 }
                 else
                 {
                     otherStrings.Add(word);
-                    otherStrings.Sort();
                 }
             }
-            averageOfInts=(double) intSum / (double)intCounter;
+            otherStrings.Sort();
+            averageOfInts =(double) intSum / (double)intCounter;
             averageOfDoubles = doubleSum / (double)doubleCounter;
-            Console.WriteLine("Number of integers: '{0}'", intCounter);
-            Console.WriteLine("Average of integers: '{0:0.##}'".PadRight(15), averageOfInts);
-            Console.WriteLine("Number of doubles: '{0}'", doubleCounter);
-            Console.WriteLine("Average of doubles: '{0:0.##}'", averageOfDoubles);
-            Console.WriteLine(otherStrings);
-
+            info.AverageOfInts = averageOfInts;
+            info.AverageOfDoubles = averageOfDoubles;
+            info.IntStrings = intStrings;
+            info.DoubleStrings = doubleStrings;
+            info.OtherStrings = otherStrings;
+            return info;
+        }
+        public void ConsoleWritter(InfoAboutString info)
+        {
+            Console.WriteLine("Number of integers: '{0}'", info.IntCounter);
+            Console.WriteLine("Integers:".PadLeft(15));
+            foreach (string intString in info.IntStrings)
+            {
+                Console.WriteLine("'{0}'".PadLeft(15), intString);
+            }
+            Console.WriteLine("Average of integers: '{0:0.##}'".PadLeft(15), info.AverageOfInts);
+            Console.WriteLine("Number of doubles: '{0}'", info.DoubleCounter);
+            Console.WriteLine("Doubles:".PadLeft(15));
+            foreach (string doubleString in info.DoubleStrings)
+            {
+                Console.WriteLine("'{0}'".PadLeft(15), doubleString);
+            }
+            Console.WriteLine("Average of doubles: '{0:0.##}'", info.AverageOfDoubles);
+            Console.WriteLine("Strings:");
+            foreach (string outString in info.OtherStrings)
+            {
+                Console.WriteLine("{0}", outString);
+            }
         }
     }
 }
