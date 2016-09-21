@@ -27,7 +27,13 @@ namespace Task2_2
                 keyboardInput = Console.ReadLine();
                 if (!keyboardInput.Equals("exit"))
                 {
-                    sentences.Add(keyboardInput);
+                    if (!String.IsNullOrWhiteSpace(keyboardInput))
+                    {
+                        sentences.Add(keyboardInput);
+                    }
+                    else {
+                        Console.WriteLine("Your string is empty or whitespace");
+                    }
                 }
             }
             return sentences;
@@ -38,8 +44,8 @@ namespace Task2_2
             int intSum=0;
             int doubleCounter = 0;
             double doubleSum = 0;
-            int intValue;
-            double doubleValue;
+            int intValue=0;
+            double doubleValue=0;
             double averageOfInts = 0;
             double averageOfDoubles = 0;
             ArrayList intStrings = new ArrayList();
@@ -66,9 +72,14 @@ namespace Task2_2
                     otherStrings.Add(word);
                 }
             }
-            otherStrings.Sort();
-            averageOfInts =(double) intSum / (double)intCounter;
-            averageOfDoubles = doubleSum / (double)doubleCounter;
+            if (intCounter!=0)
+            {
+                averageOfInts = (double)intSum / (double)intCounter;
+            }
+            if (doubleCounter != 0)
+            {
+                averageOfDoubles = doubleSum / (double)doubleCounter;
+            }
             info.AverageOfInts = averageOfInts;
             info.AverageOfDoubles = averageOfDoubles;
             info.IntStrings = intStrings;
@@ -76,10 +87,15 @@ namespace Task2_2
             info.OtherStrings = otherStrings;
             return info;
         }
+     
         public void ConsoleWritter(InfoAboutString info)
         {
             Console.WriteLine("Number of integers: '{0}'", info.IntCounter);
             Console.WriteLine("Integers:".PadLeft(15));
+            if (info.IntStrings.Count == 0)
+            {
+                Console.WriteLine("No Integers :(".PadLeft(15));
+            }
             foreach (string intString in info.IntStrings)
             {
                 Console.WriteLine("'{0}'".PadLeft(15), intString);
@@ -87,12 +103,20 @@ namespace Task2_2
             Console.WriteLine("Average of integers: '{0:0.##}'".PadLeft(15), info.AverageOfInts);
             Console.WriteLine("Number of doubles: '{0}'", info.DoubleCounter);
             Console.WriteLine("Doubles:".PadLeft(15));
+            if (info.DoubleStrings.Count == 0)
+            {
+                Console.WriteLine("No Doubles :(".PadLeft(15));
+            }
             foreach (string doubleString in info.DoubleStrings)
             {
                 Console.WriteLine("'{0}'".PadLeft(15), doubleString);
             }
             Console.WriteLine("Average of doubles: '{0:0.##}'", info.AverageOfDoubles);
             Console.WriteLine("Strings:");
+            if (info.OtherStrings.Count == 0)
+            {
+                Console.WriteLine("No Strings :(".PadLeft(15));
+            }
             foreach (string outString in info.OtherStrings)
             {
                 Console.WriteLine("{0}", outString);
