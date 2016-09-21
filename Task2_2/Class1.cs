@@ -67,6 +67,7 @@ namespace Task2_2
             Console.WriteLine("Average of integers: '{0:0.##}'".PadRight(15), averageOfInts);
             Console.WriteLine("Number of doubles: '{0}'", doubleCounter);
             Console.WriteLine("Average of doubles: '{0:0.##}'", averageOfDoubles);
+            Console.WriteLine(otherStrings);
 
         }
     }
