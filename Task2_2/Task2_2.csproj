@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="WorkWithStrings.cs" />
     <Compile Include="StringLengthComparer.cs" />
     <Compile Include="InfoAboutString.cs" />
     <Compile Include="Program.cs" />
