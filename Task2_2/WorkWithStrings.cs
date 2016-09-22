@@ -80,6 +80,8 @@ namespace Task2_2
             {
                 averageOfDoubles = doubleSum / (double)doubleCounter;
             }
+            info.IntCounter = intCounter;
+            info.DoubleCounter = doubleCounter;
             info.AverageOfInts = averageOfInts;
             info.AverageOfDoubles = averageOfDoubles;
             info.IntStrings = intStrings;
